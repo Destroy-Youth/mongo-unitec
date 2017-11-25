@@ -5,6 +5,18 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+
+/*
+Aplicaación:
+https://lihe-mongounitec.herokuapp.com/api/mensajito
+*/
+
+
+
+
+
+
+
 @SpringBootApplication
 public class MongounitecApplication implements CommandLineRunner{
 
