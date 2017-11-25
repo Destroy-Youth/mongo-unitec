@@ -29,6 +29,7 @@ public class ControladorMensajito {
     
     
     //Metodo GET buscar todos
+    @CrossOrigin
     @RequestMapping(value="/mensajito", //Se indica que se hará la uri con el id
             method = RequestMethod.GET, //Request
             headers = {"Accept=application/json"}) //Se da ebncabezado tipo json
@@ -37,6 +38,7 @@ public class ControladorMensajito {
     }
     
     //Metodo GET buscar por ID
+    @CrossOrigin
     @RequestMapping(value="/mensajito/{id}",  //construccion de uri con variable de ruta {}
             method = RequestMethod.GET,
             headers = {"Accept=application/json"})
@@ -46,6 +48,7 @@ public class ControladorMensajito {
     
     
     //Metodo POST guardar version para clientes variables (web y desktop) (antigua)
+    @CrossOrigin
     @RequestMapping(value = "/mensajito/{titulo}/{cuerpo}", 
             method = RequestMethod.POST,
             headers = {"Accept=application/json"})
@@ -58,6 +61,7 @@ public class ControladorMensajito {
     }
     
     //Metodo POST guardar pero es una version mas pura y efectiva (moderni)
+    @CrossOrigin
     @RequestMapping(value = "/mensajito",
             method = RequestMethod.POST,
             headers = {"Accept=application/json"})
@@ -72,8 +76,36 @@ public class ControladorMensajito {
         return es;
     }
     
+    //Metodo PUT actualizar
+    @CrossOrigin
+     @RequestMapping(value = "/mensajito",
+            method = RequestMethod.PUT,
+            headers = {"Accept=application/json"})
+    public Estatus actualizarMensajitoMejorado(@RequestBody String json)
+            throws Exception{
+        //Transformar el json a java
+        ObjectMapper mapper=new ObjectMapper();
+        Mensajito mensa = mapper.readValue(json, Mensajito.class); //mapear json a Mensajito
+        repoMensa.save(mensa);
+        Estatus es= new Estatus();
+        es.setSuccess(true);
+        return es;
+    }
     
     
+   //Metodo DELETE 
+    @CrossOrigin
+    @RequestMapping(value = "/mensajito/{id}",
+            method = RequestMethod.DELETE,
+            headers = {"Accept=application/json"})
+    public Estatus borrarMensajitoMejorado(@PathVariable String id)
+            throws Exception{
+        //Transformar el json a java 
+        repoMensa.delete(id);
+        Estatus es= new Estatus();
+        es.setSuccess(true);
+        return es;
+    }
     
     
 }
